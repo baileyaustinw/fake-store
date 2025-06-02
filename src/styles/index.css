@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  line-height: 1.5;
+  color: #404e4d;
+}
+
+#content {
+  max-width: 100vw;
+}
+
+.loading-message,
+#error-page {
+  width: 100%;
+  margin-top: 30vh;
+}
+
+.loading-message p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#error-page > * {
+  text-align: center;
+}
+
+#error-page > a {
+  width: 10%;
+  display: block;
+  margin: 0 auto;
+}
+
+nav#navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2rem 3rem;
+  background-color: #65afff;
+  align-items: center;
+}
+
+#navbar .logo {
+  width: 10rem;
+  font-size: 1.5rem;
+}
+
+#navbar > .logo > a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#navbar .menu {
+  flex: 1;
+  justify-items: end;
+}
+
+#navbar > .menu > ul {
+  list-style-type: none;
+}
+
+#navbar > .menu > ul > li {
+  display: inline-block;
+}
+
+#navbar > .menu > ul > li > a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+#navbar > .menu > ul > li > a:hover {
+  text-decoration: underline;
+}
+
+#navbar > .menu > ul > li > a > svg {
+  width: 24px;
+  height: 24px;
+}
+
+#navbar > .menu > ul > li > a > span {
+  margin-left: 0.5rem;
+  font-weight: 900;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.product-card {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  padding: 2rem 4rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.product-card > .product-img-container {
+  padding: 2rem;
+  align-self: center;
+}
+
+.product-card > .product-img-container > .product-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.product-card > .product-title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.product-card > .product-desc {
+  font-size: 0.75rem;
+  font-weight: 300;
+}
+
+.product-card > .product-input {
+  display: grid;
+}
+
+.product-card > .product-input > p {
+  margin-top: 1rem;
+  font-weight: 900;
+}
+
+.product-card > .product-input > a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  background-color: #12b76a;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.product-card > .product-input > a:hover {
+  background-color: #11a761;
+}
+
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: 75%;
+  margin: 0 auto;
+  padding: 2rem 4rem;
+}
+
+.product-detail > .product-img-container {
+  padding: 2rem;
+}
+
+.product-detail > .product-img-container > img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.product-detail > .product-details-container {
+  padding: 2rem;
+}
+
+/*
+* Loading spinning animation
+*/
+.lds-facebook,
+.lds-facebook div {
+  box-sizing: border-box;
+}
+.lds-facebook {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: currentColor;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0s;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+/*
+* End loading animation
+*/
