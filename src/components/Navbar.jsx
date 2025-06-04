@@ -1,15 +1,4 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { getProductsInCart } from "../helpers/products";
-
-export async function loader() {
-  try {
-    const products = getProductsInCart();
-
-    return products;
-  } catch (error) {
-    console.log(error.message);
-  }
-}
 
 export default function Navbar() {
   const products = useLoaderData();

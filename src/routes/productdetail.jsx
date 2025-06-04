@@ -47,6 +47,7 @@ export default function ProductDetail() {
                   min="0"
                   max="100"
                   defaultValue={1}
+                  id="quantity"
                 />
                 <input type="submit" value="Add to Cart" />
               </div>

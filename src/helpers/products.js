@@ -54,13 +54,11 @@ export async function updateProductInCart(id, newQuantity) {
 
   let product = productsInCart.find((product) => product.id == id);
   if (!product) {
-    console.log("no product found in cart for id " + id);
     product = await getProduct(id);
     productsInCart.unshift(product);
-    console.log("product added to cart: " + product);
   }
 
-  if (newQuantity == 0) return deleteProductInCart(id);
+  if (newQuantity == 0) deleteProductInCart(id);
 
   product.quantity = newQuantity;
   await setProductsInCart(productsInCart);
