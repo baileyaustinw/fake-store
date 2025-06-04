@@ -15,6 +15,7 @@ import Products, {
 import Product from "./components/Product.jsx";
 import ProductDetail, {
   loader as productLoader,
+  action as productAction,
 } from "./routes/productdetail.jsx";
 import Cart from "./routes/cart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
           element={<ProductDetail />}
           errorElement={<ErrorPage />}
           loader={productLoader}
+          action={productAction}
           hydrateFallbackElement={<HydrateFallback />}
         />
         <Route path="/cart" element={<Cart />} />

@@ -22,15 +22,9 @@ export async function getProduct(id) {
 }
 
 export async function getProductsInCart() {
-  let products;
-
-  try {
-    products = await localforage.getItem("products");
-  } catch (error) {
-    console.log(error.message);
-    products = [];
-  }
-  return products;
+  let products = [];
+  products = await localforage.getItem("inCart");
+  return products ? products : [];
 }
 
 export async function setProductsInCart(products) {
@@ -53,14 +47,24 @@ export async function deleteProductInCart(id) {
 }
 
 export async function updateProductInCart(id, newQuantity) {
-  let products = getProductsInCart();
-  let product = products.find((product) => product.id == id);
-  if (!product) throw new Error("No product found for", id);
+  console.log(id);
+  let productsInCart = await getProductsInCart();
+  console.log(productsInCart);
+  if (!productsInCart) throw new Error("no products in cart");
+
+  let product = productsInCart.find((product) => product.id == id);
+  if (!product) {
+    console.log("no product found in cart for id " + id);
+    product = await getProduct(id);
+    productsInCart.unshift(product);
+    console.log("product added to cart: " + product);
+  }
+
   if (newQuantity == 0) return deleteProductInCart(id);
 
   product.quantity = newQuantity;
-  await setProductsInCart(products);
-  return product;
+  await setProductsInCart(productsInCart);
+  return productsInCart;
 }
 
 export async function clearData() {
