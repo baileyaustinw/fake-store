@@ -47,7 +47,7 @@ export default function Products() {
           })
         ) : (
           <div className="empty-products">
-            <h1>No products to show</h1>
+            <h1>Shopping cart is empty</h1>
           </div>
         )}
       </div>

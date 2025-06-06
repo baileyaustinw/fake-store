@@ -47,9 +47,9 @@ export async function deleteProductInCart(id) {
 }
 
 export async function updateProductInCart(id, newQuantity) {
-  console.log(id);
+  //console.log(id);
   let productsInCart = await getProductsInCart();
-  console.log(productsInCart);
+  //console.log(productsInCart);
   if (!productsInCart) throw new Error("no products in cart");
 
   let product = productsInCart.find((product) => product.id == id);

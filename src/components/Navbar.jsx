@@ -1,13 +1,16 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ShopContext } from "../routes/root";
 
 export default function Navbar() {
-  const products = useLoaderData();
+  const { cartItems } = useContext(ShopContext);
+  console.log(cartItems);
 
   let numProducts;
-  if (!products) {
+  if (!cartItems) {
     numProducts = 0;
   } else {
-    numProducts = products.length;
+    numProducts = cartItems.length;
   }
 
   return (

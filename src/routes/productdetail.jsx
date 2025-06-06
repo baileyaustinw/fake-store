@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import { getProduct, updateProductInCart } from "../helpers/products";
 import { Form } from "react-router-dom";
+import { ShopContext } from "./root";
+import { useContext } from "react";
 
 export async function loader({ params }) {
   try {
@@ -20,6 +22,16 @@ export async function action({ request, params }) {
 
 export default function ProductDetail() {
   const product = useLoaderData();
+  const { cartItems } = useContext(ShopContext);
+  //console.log(product);
+  //console.log(cartItems);
+  const currentProduct = cartItems.find((item) => item.id === product.id);
+  //console.log(currentProduct);
+
+  function handleSubmit(formData) {
+    updateProductInCart(currentProduct.id, formData.get("quantity"));
+    currentProduct.quantity = formData.get("quantity");
+  }
 
   return (
     <>
@@ -38,7 +50,7 @@ export default function ProductDetail() {
           </div>
           <p className="product-description">{product.description}</p>
           <div className="product-input-container">
-            <Form method="post">
+            <form action={handleSubmit}>
               <label htmlFor="quantity">Quantity:</label>
               <div className="input-wrapper">
                 <input
@@ -46,12 +58,14 @@ export default function ProductDetail() {
                   type="number"
                   min="0"
                   max="100"
-                  defaultValue={1}
+                  defaultValue={
+                    currentProduct.quantity ? currentProduct.quantity : 0
+                  }
                   id="quantity"
                 />
                 <input type="submit" value="Add to Cart" />
               </div>
-            </Form>
+            </form>
           </div>
         </div>
       </div>

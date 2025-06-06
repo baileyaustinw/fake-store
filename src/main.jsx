@@ -7,7 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import "./styles/index.css";
-import Root, { loader as navbarLoader } from "./routes/root.jsx";
+import Root from "./routes/root.jsx";
 import Products, {
   loader as productsLoader,
   HydrateFallback,
@@ -26,7 +26,6 @@ const router = createBrowserRouter(
       path="/"
       element={<Root />}
       errorElement={<ErrorPage />}
-      loader={navbarLoader}
       hydrateFallbackElement={<HydrateFallback />}
     >
       <Route errorElement={<ErrorPage />}>
@@ -42,7 +41,6 @@ const router = createBrowserRouter(
           element={<ProductDetail />}
           errorElement={<ErrorPage />}
           loader={productLoader}
-          action={productAction}
           hydrateFallbackElement={<HydrateFallback />}
         />
         <Route path="/cart" element={<Cart />} />
