@@ -1,6 +1,6 @@
 //import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import Index from "./Index";
+import Index from "./index";
 import Navbar from "../components/Navbar";
 import "../styles/App.css";
 import {
