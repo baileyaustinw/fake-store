@@ -32,10 +32,10 @@ export default function ProductDetail() {
 
   return (
     <>
-      <div className="grid grid-cols-2 grid-rows-auto w-[75%] mx-auto my-0 py-[2rem] px-[4rem] items-stretch">
-        <div className="p-[2rem]">
+      <div className="grid md:grid-cols-2 grid-rows-auto lg:w-[75%] mx-auto my-0 lg:py-[2rem] lg:px-[4rem] items-stretch">
+        <div className="p-[2rem] md:items-center">
           <img
-            className="max-h-[350px]"
+            className="max-h-[350px] block mx-auto"
             src={product.image}
             alt={product.title}
           />

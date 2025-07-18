@@ -21,7 +21,7 @@ export default function CartItem({ cartItem }) {
 
   return (
     <div
-      className="grid grid-cols-[1fr_3fr] gap-20 my-0 mx-auto rounded-2xl rounded-2xl border-2 shadow-sm/20 border-zinc-100 p-5"
+      className="grid lg:grid-cols-[1fr_3fr] gap-20 my-0 mx-auto rounded-2xl rounded-2xl border-2 shadow-sm/20 border-zinc-100 p-5"
       key={cartItem.id}
     >
       <div className="self-center mx-auto">
