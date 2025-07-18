@@ -1,37 +1,13 @@
 import Product from "../components/Product";
-import { useLoaderData } from "react-router-dom";
-import { getProducts } from "../helpers/products";
-
-export async function loader() {
-  try {
-    const products = await getProducts();
-    return products;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-export function HydrateFallback() {
-  return (
-    <>
-      <div className="loading-message">
-        <p>loading products</p>
-        <div className="lds-facebook">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </>
-  );
-}
+import { ShopContext } from "./root";
+import { useContext } from "react";
 
 export default function Products() {
-  const products = useLoaderData();
+  const { products } = useContext(ShopContext);
 
   return (
     <>
-      <div className="products">
+      <div className="grid grid-cols-4 gap-5 items-stretch">
         {products ? (
           products.map((product) => {
             return (

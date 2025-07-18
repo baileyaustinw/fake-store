@@ -3,37 +3,76 @@ import { Outlet, useLocation } from "react-router-dom";
 import Index from "./Index";
 import Navbar from "../components/Navbar";
 import "../styles/App.css";
-import { getProductsInCart } from "../helpers/products";
-import { createContext } from "react";
+import {
+  getProducts,
+  getProductsInCart,
+  setProductsInCart,
+} from "../helpers/products";
+import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
-import { updateProductInCart } from "../helpers/products";
 
 export const ShopContext = createContext({
   cartItems: [],
-  addToCart: () => {},
+  products: [],
+  setCartItem: () => {},
+  removeFromCart: () => {},
 });
+export const useShop = () => useContext(ShopContext);
 
-export default function Root() {
+export default function ShopProvider() {
   const [cartItems, setCartItems] = useState([]);
-  useEffect(() => {
-    let ignore = false;
-    // eslint-disable-next-line no-unused-vars
-    const products = getProductsInCart().then((result) => {
-      if (!ignore) setCartItems(result);
-    });
+  const [products, setProducts] = useState([]);
 
-    return () => {
-      ignore = true;
-    };
+  useEffect(() => {
+    getProducts().then((data) => {
+      if (data) setProducts(data);
+    });
   }, []);
+
+  useEffect(() => {
+    getProductsInCart().then((data) => {
+      if (data) setCartItems(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    setProductsInCart(cartItems);
+  }, [cartItems]);
+
+  const setCartItem = (item, quantity) => {
+    setCartItems((prev) => {
+      // check if item already exists in cart
+      const exists = prev.find((i) => i.id === item.id);
+      if (exists) {
+        // if it exists. update its quantity
+        return prev.map((i) =>
+          i.id === item.id
+            ? { ...i, quantity: parseInt(quantity) } // merge with new quantity
+            : i
+        ); // leave other items unchanged
+      }
+
+      // if it doesn't exist, add the item to cart with quantity
+      return [...prev, { ...item, quantity: parseInt(quantity) }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
   return (
     <>
-      <ShopContext.Provider value={{ cartItems, updateProductInCart }}>
+      <ShopContext.Provider
+        value={{ cartItems, products, setCartItem, removeFromCart }}
+      >
         <Navbar />
-        <div id="content">{!isHomePage ? <Outlet /> : <Index />}</div>
+        <div className="w-[80vw] mx-auto my-0 py-10">
+          {!isHomePage ? <Outlet /> : <Index />}
+        </div>
       </ShopContext.Provider>
     </>
   );

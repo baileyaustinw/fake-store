@@ -36,20 +36,23 @@ export async function setProducts(products) {
 }
 
 export async function deleteProductInCart(id) {
-  let products = await localforage.getItem("products");
-  let index = products.find((product) => product.id == id);
-  if (index > -1) {
-    products.splice(index, 1);
-    await setProductsInCart(products);
+  let productsInCart = await getProductsInCart();
+  if (!productsInCart) throw new Error("no products in cart");
+
+  let index = productsInCart.find((product) => product.id == id);
+  console.log(productsInCart.indexOf(index));
+  console.log(index);
+  if (productsInCart.indexOf(index) > -1) {
+    productsInCart.splice(index, 1);
+    await setProductsInCart(productsInCart);
     return true;
   }
   return false;
 }
 
+// update product or add new product to cart if does not exist
 export async function updateProductInCart(id, newQuantity) {
-  //console.log(id);
   let productsInCart = await getProductsInCart();
-  //console.log(productsInCart);
   if (!productsInCart) throw new Error("no products in cart");
 
   let product = productsInCart.find((product) => product.id == id);
